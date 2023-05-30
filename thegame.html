@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+
+        @font-face {
+        font-family: "Poppins-Black";
+        font-family: "Poppins-Regular";
+        src: url(Poppins-Black.ttf);
+        src: url(Poppins-Regular.ttf);
+        }
+
+        body {
+	    background-color: rgb(0, 0, 0);
+        font-family:"Poppins";
+        font-size:1vw;
+        text-align: center;
+        color:white;
+        }
+
+        .header {
+            min-height:100px;
+            margin-bottom:20px;
+        }
+
+        .myButton {
+	    background-color:#4e008e;
+	    display:inline-block;
+	    cursor:pointer;
+	    color:#ffffff;
+	    font-size:1.4em;
+	    padding:14px 34px;
+	    text-decoration:none;
+        border:0;
+        margin-top:10px;
+        }
+        .myButton:hover {
+	background-color:#660eae;
+        }
+        .myButton:active {
+	    position:relative;
+        } 
+
+        .thegame {
+        display:flex;
+        justify-content: center;
+        }
+
+        .grid{
+            display: flex;
+            flex-wrap: wrap;
+            border: solid 1px;
+            width: 600px;
+            height: 600px;
+            background-color:black;
+        }
+
+        .grid div {
+            width: 40px;
+            height: 40px;
+        }
+
+        .shooter {
+            background-color:green;
+        }
+
+        .invader {
+
+            border-radius: 10px;
+            background: red;
+            border-radius: 50%
+        }
+
+        .boom {
+            /* background-image: url('fire.jpeg');
+            background-size: contain;
+            background-repeat: no-repeat; */
+            background-color:black;
+        }
+
+        .laser {
+            background-color:orange;
+        }
+
+
+
+    </style>
+
+    <div class="header"><h1>Score:<span id="result"></span></h1>Right and left arrow for moving, press spacebar to nuke the bastards!</div></div>
+
+    <div class="thegame">
+
+    <div class="grid">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+
+
+    </div>
+</div>
+
+
+<div><button class="myButton" onclick="window.location.href='index.html';">Back to planning!</button></div>
+
+    <script>
+
+//sound FX
+
+
+const Sound = new Audio('hit.wav');
+
+/* document.body.addEventListener('keyup', function(event) {
+  if (event.target.tagName !== 'BUTTON') {
+    Sound.play();
+  }
+}); */
+
+document.addEventListener('keyup', event => {
+  if (event.code === 'Space') {
+    Sound.play();
+  }
+})
+
+
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const squares = document.querySelectorAll('.grid div')
+            const resultDisplay = document.querySelector('#result')
+            let width = 15
+            let currentShooterIndex = 202
+            let currentInvaderIndex = 0
+            let alienInvadersTakenDown = []
+            let result = 0
+            let direction = 1
+            let invaderId
+
+            //define the alien invaders
+
+            const alienInvaders = [
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+                15,16,17,18,19,20,21,22,23,24,
+                30,31,32,33,34,35,36,37,38,39
+            ]
+
+            //draw the alien invaders
+            alienInvaders.forEach( invader => squares[currentInvaderIndex + invader].classList.add('invader'))
+            
+            //draw the shooter
+            squares[currentShooterIndex].classList.add('shooter')
+
+            //move the shooter
+            function moveShooter(e) {
+                squares[currentShooterIndex].classList.remove('shooter')
+                switch(e.keyCode) {
+                    case 37:
+                    if(currentShooterIndex % width !== 0) currentShooterIndex -=1
+                    break
+                    case 39:
+                        if(currentShooterIndex % width < width -1) currentShooterIndex +=1
+                        break
+                }
+                squares[currentShooterIndex].classList.add('shooter')
+            }
+            document.addEventListener('keydown', moveShooter)
+
+            //move the alien invaders
+
+            function moveInvaders() {
+                const leftEdge = alienInvaders[0] % width === 0
+                const rightEdge = alienInvaders[alienInvaders.length -1] % width === width -1
+
+                if((leftEdge && direction === -1) || (rightEdge && direction === 1)){
+                    direction = width
+                } else if (direction === width){
+                    if (leftEdge) direction = 1
+                    else direction = -1
+                }
+                for (let i = 0; i <= alienInvaders.length -1; i++) {
+                    squares[alienInvaders[i]].classList.remove('invader')
+                }
+                for (let i = 0; i <= alienInvaders.length -1; i++) {
+                    alienInvaders[i] += direction
+                }
+                for (let i = 0; i <= alienInvaders.length -1; i++) {
+                    if (!alienInvadersTakenDown.includes(i)){
+                        squares[alienInvaders[i]].classList.add('invader')
+                    }
+                }
+
+                //decide a game over
+                if(squares[currentShooterIndex].classList.contains('invader', 'shooter')) {
+                    resultDisplay.textContent = 'Game Over'
+                    squares[currentShooterIndex].classList.add('boom')
+                    clearInterval(invaderId)
+                }
+                for (let i = 0; i <= alienInvaders.length -1; i++) {
+                    if(alienInvaders[i] > (squares.length - (width-1))) {
+                        resultDisplay.textContent = 'Game Over'
+                        clearInterval(invaderId)
+                    }
+                }
+
+                //decide a win
+                if(alienInvadersTakenDown.length === alienInvaders.length) {
+                    resultDisplay.textContent = ' Yes! You Won The Missing Credit!'
+                    clearInterval(invaderId)
+                     }
+            }
+            invaderId = setInterval(moveInvaders, 500)
+
+            // shoot the aliens
+            function shoot(e) {
+                let LaserId
+                let currentLaserIndex = currentShooterIndex
+                //move the laser from the shooter to the alien Invader
+                function moveLaser() {
+                    squares[currentLaserIndex].classList.remove('laser')
+                    currentLaserIndex -= width
+                    squares[currentLaserIndex].classList.add('laser')
+                    if(squares[currentLaserIndex].classList.contains('invader')) {
+                        squares[currentLaserIndex].classList.remove('laser')
+                        squares[currentLaserIndex].classList.remove('invader')
+                        squares[currentLaserIndex].classList.add('boom')
+
+                        setTimeout(() => squares[currentLaserIndex].classList.remove('boom'), 250)
+                        clearInterval(laserId)
+
+                        const alienTakeDown = alienInvaders.indexOf(currentLaserIndex)
+                        alienInvadersTakenDown.push(alienTakeDown)
+                        result++
+                        resultDisplay.textContent = result
+
+                    }
+                    if(currentLaserIndex < width) {
+                        clearInterval(laserId)
+                        setTimeout(() => squares[currentInvaderIndex].classList.remove('laser'), 100)
+                    }
+                }
+
+              /*   document.addEventListener('keyup', e => {
+                    if (e.keyCode === 32) {
+                        laserId = setInterval(moveLaser, 100)
+                    }
+                }) */
+
+                switch(e.keyCode) {
+                    case 32:
+                    laserId = setInterval(moveLaser, 100)
+                    break    
+                }
+
+            }
+
+            document.addEventListener('keyup', shoot)
+
+
+        })
+
+
+
+    </script>
+    
+</body>
+</html>

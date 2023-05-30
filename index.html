@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jani Tuovinen - Personal Study Planner</title>
+</head>
+
+<style>
+
+/*yleiset tyylit */
+
+@font-face {
+  font-family: "Poppins-Black";
+  font-family: "Poppins-Regular";
+  src: url(Poppins-Black.ttf);
+  src: url(Poppins-Regular.ttf);
+}
+
+body {
+	background-color: #ffffff;
+    font-family:"Poppins";
+    font-size:1vw;
+    background-color:rgb(242, 242, 242);
+    text-align: center;
+}
+
+.header{
+    margin:1vh;
+}
+
+footer{
+    height:100px;
+    margin-top:50px;
+    padding-top:50px;
+    display:flex;
+    justify-content: center;
+    background-color:gray;
+}
+
+   /*  menneet vuodet stylet */
+
+   h1{
+    text-align:center;
+    font-size:3em;
+   }
+
+   h2{
+    text-align:center;
+   }
+
+   p {
+    margin: 0;
+}
+
+.myButton {
+	background-color:#4e008e;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:1.4em;
+	padding:14px 34px;
+	text-decoration:none;
+    border:0;
+    margin-top:10px;
+}
+.myButton:hover {
+	background-color:#660eae;
+}
+.myButton:active {
+	position:relative;
+} 
+
+.painikkeet {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin: 1em;
+}
+
+ /*  menneet vuodet stylet */
+
+    #years{
+        display:grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        flex-direction:column;
+        justify-content: center;
+        align-items:center;
+        gap: 7vw;
+        max-width: 40%;
+        margin: auto;
+    }
+
+    .year{
+        width: 12vw;
+        height: 40vh;
+        background-color:rgb(55, 55, 55);
+        border: solid 4px rgb(55, 55, 55);
+        display:grid;
+        grid-template-rows: repeat(10,1fr);
+        flex-direction:row;
+        justify-content: center;
+        align-items:center;
+    }
+
+    .kesa{
+        width: 12vw;
+        height: 40vh;
+        background-color:rgb(203, 132, 19);
+        border: solid 4px rgb(203, 132, 19);
+        display:grid;
+        grid-template-rows: repeat(10,1fr);
+        flex-direction:row;
+        justify-content: center;
+        align-items:center;
+    }
+
+    #minors {
+        display:flex;
+        justify-content: center;
+        align-items:center;
+        gap: 1vw;
+        margin-top: 1vw;
+        min-height: 100px;
+        flex-wrap: wrap;
+        
+    }
+
+  .minor{
+    width: 13vw;
+    min-height: 1vh;
+    max-height: 1vh;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.3vw;
+    margin-top: 1vh;
+    box-shadow: 5px 9px 0px 0px #2e2e2e;
+}
+
+
+    .drag-over{
+        border: dashed 3px rgb(241, 241, 241);
+    }
+
+   .wrapper{
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        padding:0.5em;
+        margin:0.5em;
+    } 
+
+    .courses{
+        display:flex;
+        flex-direction: row;
+        align-items:center;
+        justify-content:center;
+        padding:50px;
+    }
+
+
+    div#infobox {
+    background-color: rgb(55, 55, 55);;
+    color: white;
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 30%;
+    margin: auto;
+    padding:1em;
+    min-height:100px;
+    margin-bottom:100px;
+    margin-top:50px
+}
+
+.pakolliset {
+    background-color:rgb(238, 87, 87);
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.vapaat{
+    background-color:green;
+}
+
+.vaihtoehdot{
+    background-color:rgb(141, 134, 244);
+}
+
+input {
+    margin-top: 0.5rem;
+}
+
+input::placeholder {
+    font-weight: bold;
+    opacity: 0.5;
+    color: red;
+}
+
+[contentEditable=true]:empty:not(:focus):before {
+  content: attr(data-text)
+}
+
+.lasku{
+    background-color:rgb(55, 55, 55);
+    font-size:1.2vw;
+    color:white;
+    margin:5vw;
+    padding:1vw;
+}
+
+
+.lasku span{
+    color:black;
+    background-color:white;
+    padding:3px 15px 3px 15px;
+}
+
+.lasku p{
+    padding: 0.5rem;
+}
+
+#total {
+    font-size:2vw;
+    color:white;
+    border-radius: 10px;;
+    margin:1vw;
+}
+
+
+/* progress bar */
+
+#myProgress {
+  width: 75%;
+  background-color: #c9c9c9;
+  margin:auto;
+  padding: 3px;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: #4e008e;
+}
+
+#progressButton {
+    background-color:#4e008e;
+    color:rgb(239, 239, 239);
+    display:inline-block;
+	cursor:pointer;
+	font-size:0.8em;
+	padding:14px 34px;
+	text-decoration:none;
+    border:0;
+    margin:0.5vw;
+}
+
+
+/* kurssipallot */
+
+.courseColours {
+    display: flex;
+    justify-content: center;
+    margin:2vw;
+    padding:2vw;
+    background-color:rgb(221, 221, 221);
+}
+
+.courseColours h3 {
+    display: flex;
+    align-items: center;
+}
+
+
+.pallo {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    display: inline-block;
+    margin:0.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size:2vh;
+}
+
+#col1 {background-color:green}
+#col2 {background-color:rgb(238, 87, 87)}
+#col3 {background-color:rgb(141, 134, 244)}
+
+
+</style>
+
+
+<body>
+
+<div class="header">
+
+    <h1>Jani Tuovinen - Personal Study Planner</h1>
+
+</div>
+
+<h2>Courses already done in 2022-2023</h2>
+
+</label><br>
+
+
+<!-- Menneet vuodet (näyttää mitä on opiskeltu) -->
+<div class="painikkeet">
+    <button id="y2021_2" class="myButton">Autumn 2021</button>
+    <button id="y2022_1" class="myButton">Spring 2022</button>
+    <button id="y2022_2" class="myButton">Autumn 2023</button>
+    <button id="y2023_1" class="myButton">Spring 2023</button>
+</div>
+
+<div class="kurssitiedot">
+<div contentEditable=true data-text="Please click the buttons to see the courses done so far" id="infobox"></div>
+</div>
+</div></div>
+
+
+
+<!-- mitä opintoja vielä valittavissa -->
+
+<h2>Courses available/already picked for third year</h2>
+
+
+    <div id="years">
+        <div class="wrapper">Summer studies 2023<div class="year kesa"></div></div>
+        <div class="wrapper">2023 / Autumn<div class="year"></div></div>
+        <div class="wrapper">2024 / Spring<div class="year"></div></div>
+    </div>
+
+<!--     //minors/courses -->
+
+    <div id="minors" class="minorsContainer">
+
+        <div id="m1" class="minor pakolliset" draggable="true">Media Analysis and Research 10</div>
+        <div id="m2" class="minor pakolliset" draggable="true">Practical Training 10</div>
+        <div id="m3" class="minor pakolliset" draggable="true">Practical Training 4</div>
+        <div id="m4" class="minor pakolliset" draggable="true">Bachelor's Thesis 15</div>
+        <div id="m5" class="minor vaihtoehdot" draggable="true">Visual Design (minor) 30</div>
+        <div id="m6" class="minor vaihtoehdot" draggable="true">Animation (minor) 30</div>
+        <div id="m7" class="minor vaihtoehdot" draggable="true">Working as an Entrepreneur (minor) 30</div>
+        <div id="m8" class="minor vapaat" draggable="true">Introduction to Programming 3</div>
+        <div id="m9" class="minor vapaat" draggable="true">Podcast-kurssi 5</div>
+    </div>
+
+
+    <div class="courseColours">
+        <h3>The meaning of the colours</h3>
+        <div class="pallo" id="col1">Suitable for summer?</div>
+        <div class="pallo" id="col2">These you must have</div>
+        <div class="pallo" id="col3">Choose only one of these</div>
+    </div>    
+
+
+<!--  Kurssien laskeminen -->
+
+<div class="lasku">
+    <h1>This is how it looks like</h1>
+    <p>Previous studies <span>162</span> (Autumn 2021 - Spring 2023)</p>
+    <p>Media Analysis and Reseach <span>10</span></p>
+    <p>Bachelor's Thesis: <span>15</span></p>
+    <p>Practical training <span>14</span></p>
+    <p>One more minor: <span>30</span></p>
+    <p>Free studies <span>8</span></p>
+    <button class="myButton" onclick="countCourses()">Let's calculate!</button>
+    <div id="total"></div>
+
+</div>
+
+
+
+
+    <footer>Introduction to Programming 2023 - Course Work Project</footer>
+
+    <script>
+
+
+// ääniä
+
+
+//soittaa äänen paitsi buttoneiden kohdalla eri ääni
+
+const Sound = new Audio('hit.wav');
+
+document.body.addEventListener('click', function(event) {
+  if (event.target.tagName !== 'BUTTON') {
+    Sound.play();
+  }
+});
+
+
+const audio = new Audio("diu.wav");
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach(button => {
+  button.addEventListener("click", () => {
+    audio.play();
+  });
+});
+
+
+//menneet opinnot   
+
+
+const menneet = document.querySelector('#infobox');
+
+document.querySelectorAll('.myButton').forEach(element => {
+
+    element.addEventListener('click', function(){
+
+        if (this.id == "y2021_2"){
+            menneet.innerHTML = 
+            `<p>Tietojärjestelmät ja toimisto-ohjelmat 5</p>
+            <p>Media-alan toimintaympäristöt 2</p>
+            <p>Ideointi ja ryhmätoiminta 5</p>
+            <p>Mediahistoria 5</p>
+            <p>Elokuvailmaisu ja -tekniikka 5</p>
+            <p>Nätsvenska - ruotsin valmentava verkkokurssi 3</p>
+            <p>Elokuvatuotannon perusteet 5</p>`
+        } 
+     if (this.id == "y2022_1"){
+            menneet.innerHTML = 
+            `<p>Media-alan viestintätaidot 5</p>
+            <p>Uravalmennus ja opintojen ohjaus 5 </p>
+            <p>Introduction to Visual Design 3</p>
+            <p>Introduction to Video 3</p>
+            <p>Introduction to Web Tools 3</p>
+            <p>Introduction to Animation 3</p>
+            <p>Emerging Media Trends 5</p>
+            <p>Emerging Media Technology 5</p>
+            <p>Emerging Media Project 6</p>
+            <p>Advanced Web Design Workshop 5</p>`
+        }
+
+        if (this.id == "y2022_2"){
+            menneet.innerHTML = `
+            <p>User Interface Design and Usability 5</p>
+            <p>Service Design 5</p>
+            <p>Advanced User Experience Design Workshop 5</p>
+            <p>Ux Design Project (1) 5</p>
+            <p>Ux Design Project (2) 5</p>
+            <p>Media Professional Literature 5</p>
+            <p>Svenska i mediakultur, muntlig 1</p>
+            <p>Svenska i mediakultur, skriftlig 2 1</p>
+            <p>Practical Training 1 6<p>
+            <p>Practical Training 2 10<p>`
+        }
+
+        if (this.id == "y2023_1"){
+            menneet.innerHTML = `
+            <p>Web and App Design 5</p>
+            <p>Web and App Programming 5</p>
+            <p>Web and App Design Theory 5</p>
+            <p>Web and App Design Project (1) 5</p>
+            <p>Web and App Design Project (2) 5</p>
+            <p>English Language and Communication 5</p>
+            <p>Event Management and Marketing 5<p>`
+        } 
+
+    })
+})
+//menneet opinnot päättyy tähän
+
+
+
+        const theMinors = document.querySelectorAll('.minor');
+        const theYears = document.querySelectorAll('.year');
+        const minorsContainer = document.getElementById('minors');
+
+        theMinors.forEach(minorElement => {
+            minorElement.addEventListener('dragstart', dragStart)
+        })
+
+        function dragStart(event){
+
+            event.dataTransfer.setData('text/plain', event.target.id);
+
+        }
+
+        theYears.forEach(yearElement => {
+            yearElement.addEventListener('dragenter', dragEnter);
+            yearElement.addEventListener('dragover', dragOver);
+            yearElement.addEventListener('dragleave', dragLeave);
+            yearElement.addEventListener('drop', drop);
+        })
+
+        minorsContainer.addEventListener('dragenter', dragEnter);
+        minorsContainer.addEventListener('dragover', dragOver);
+        minorsContainer.addEventListener('dragleave', dragLeave);
+        minorsContainer.addEventListener('drop', dropBack);
+
+        function dragEnter(event){
+            event.preventDefault();
+            event.target.classList.add('drag-over');
+        }
+
+        function dragOver(event){
+            event.preventDefault();
+            event.target.classList.add('drag-over');  
+        }
+
+        function dragLeave(event){
+            event.target.classList.remove('drag-over');
+        }
+
+        function drop(event){
+            event.target.classList.remove('drag-over');
+            const id = event.dataTransfer.getData('text/plain');
+            const draggable = document.getElementById(id);
+
+            event.target.appendChild(draggable);
+            
+            if (event.target.innerHTML == ''){
+                event.target.appendChild(draggable);
+            }
+            }
+            
+
+        function dropBack(event){
+            event.target.classList.remove('drag-over');
+            const id = event.dataTransfer.getData('text/plain');
+            const draggable = document.getElementById(id);
+
+            event.target.appendChild(draggable);
+        
+            
+        }
+
+
+
+
+
+        /* Kurssien laskeminen */
+
+        function countCourses() {
+            var thesis = 15;
+            var training = 14;
+            var minor = 30;
+            var writing = 10;
+            var free = 8;
+            var previous = 162;
+
+            var total = thesis + previous + training  + minor + writing + free ;
+            document.getElementById("total").innerHTML = 
+            
+            `Hävisit pelin!<br>` + total + `/240` + ` <br><br><div id="myProgress">
+            <div id="myBar"></div></div>
+            <br>
+            <button id="progressButton" onclick="move()">Show the progress</button>
+            <div><h3>Are you ready to fight for the missing credit?</h3><button class="myButton" onclick="window.location.href='thegame.html';">Yes, take me to space!</button></div>` ;
+        }
+
+
+        /* progress bar */
+
+        var i = 0;
+        function move() {
+        if (i == 0) {
+        i = 1;
+        var elem = document.getElementById("myBar");
+        var width = 1;
+        var id = setInterval(frame, 10);
+        function frame() {
+        if (width >= 98) {
+        clearInterval(id);
+        i = 0;
+        } else {
+        width++;
+        elem.style.width = width + "%";
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+    </script>
+    
+</body>
+</html>
